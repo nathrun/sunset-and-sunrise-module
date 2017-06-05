@@ -1,6 +1,3 @@
-import requests
-import json
-import datetime
 
 #---Sunset and sunrise times come from "https://sunrise-sunset.org/api"---
 #
@@ -40,7 +37,12 @@ import datetime
 #               "nautical_twilight_set" : str ,
 #           }
 #   }'
+#
+#-------------------------------------------------------------------------
 
+import requests
+import json
+import datetime
 
 
 #times from here are GMT time therefore adding +2 to the times are required
@@ -93,4 +95,4 @@ if __name__ == '__main__':
     print('today:')
     print(getSunDetails('today'))
     print('tomorrow:')
-    print(getSunDetails('tomorrow'))    
+    print(getSunDetails('tomorrow'))
