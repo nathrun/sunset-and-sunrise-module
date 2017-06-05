@@ -87,3 +87,10 @@ def getSunDetails(day="today"):
 
     #convert result to json string format
     return json.dumps(result)
+
+
+if __name__ == '__main__':
+    print('today:')
+    print(getSunDetails('today'))
+    print('tomorrow:')
+    print(getSunDetails('tomorrow'))    
