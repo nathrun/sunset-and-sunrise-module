@@ -40,7 +40,7 @@
 #
 #-------------------------------------------------------------------------
 
-import requests
+import urllib3
 import json
 import datetime
 
@@ -54,12 +54,16 @@ def convCorrectTimeZone(s_time, shift):
 
 def getSunDetails(day="today"):
     result = {}
-    r = requests.get('https://api.sunrise-sunset.org/json?lat=-33.9851430&lng=25.6561820&date='+day)
+    urllib3.disable_warnings()
+    http = urllib3.PoolManager()
+    r = http.request('GET','https://api.sunrise-sunset.org/json?lat=-33.9851430&lng=25.6561820&date='+day)
+    r_json = json.loads(r.data.decode('utf-8'))
+    
 
-    if(r.text == 'Array'):
+    if(r.status != 200):
         result['status'] = {
                 'successful':False,
-                'message':'check date format, request failed'
+                'message':'check date format, request failed. Status code: '+str(r.status)
             }
     else:
         result['status'] = {
@@ -68,7 +72,7 @@ def getSunDetails(day="today"):
             }
 
 
-    response = r.json()['results']
+    response = r_json['results']
 
     sunrise = convCorrectTimeZone(response['sunrise'],GMT_timeShift)
     sunset = convCorrectTimeZone(response['sunset'],GMT_timeShift)
