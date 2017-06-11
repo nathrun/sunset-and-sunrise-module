@@ -45,11 +45,11 @@ import json
 import datetime
 
 class sunInfo(object):
-    
+
     def __init__(self, latitude, longitude, time_zone):
-        self.GMT_timeShift = time_zone
-        self.lat = latitude
-        self.long = longitude
+        self.GMT_timeShift = int(time_zone)
+        self.lat = str(latitude)
+        self.long = str(longitude)
 
     def convCorrectTimeZone(self, s_time, shift):
         temp = datetime.datetime.strptime(s_time,"%I:%M:%S %p").time()
@@ -58,7 +58,7 @@ class sunInfo(object):
     def changeLocation(self, latitude, longitude, GMT_zone):
         self.lat = latitude
         self.long = longitude
-        self.GMT_timeShift = GMT_zone    
+        self.GMT_timeShift = GMT_zone
 
 
     def getSunDetails(self, day="today"):
@@ -67,7 +67,7 @@ class sunInfo(object):
         self.http = urllib3.PoolManager()
         self.r = self.http.request('GET','https://api.sunrise-sunset.org/json?lat='+self.lat+'&lng='+self.long+'&date='+day)
         self.r_json = json.loads(self.r.data.decode('utf-8'))
-        
+
 
         if(self.r.status != 200):
             self.result['status'] = {
@@ -106,38 +106,3 @@ class sunInfo(object):
 
 
 #-------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
