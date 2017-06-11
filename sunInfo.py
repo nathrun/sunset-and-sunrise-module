@@ -47,16 +47,23 @@ import datetime
 
 #times from here are GMT time therefore adding +2 to the times are required
 GMT_timeShift = 2
+lat = "-33.9851430"
+long = "25.6561820"
 
 def convCorrectTimeZone(s_time, shift):
     temp = datetime.datetime.strptime(s_time,"%I:%M:%S %p").time()
     return temp.replace(hour=temp.hour+shift)
 
+def setLocation(latitude, longitude, GMT_zone):
+    lat = latitude
+    long = longitude
+    GMT_timeShift = GMT_zone
+
 def getSunDetails(day="today"):
     result = {}
     urllib3.disable_warnings()
     http = urllib3.PoolManager()
-    r = http.request('GET','https://api.sunrise-sunset.org/json?lat=-33.9851430&lng=25.6561820&date='+day)
+    r = http.request('GET','https://api.sunrise-sunset.org/json?lat='+lat+'&lng='+long+'&date='+day)
     r_json = json.loads(r.data.decode('utf-8'))
     
 
