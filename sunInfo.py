@@ -46,9 +46,9 @@ import datetime
 
 
 #times from here are GMT time therefore adding +2 to the times are required
-GMT_timeShift = 2
-lat = "-33.9851430"
-long = "25.6561820"
+GMT_timeShift = 0
+lat = "00.0000000"
+long = "00.0000000"
 
 def convCorrectTimeZone(s_time, shift):
     temp = datetime.datetime.strptime(s_time,"%I:%M:%S %p").time()
@@ -58,6 +58,7 @@ def setLocation(latitude, longitude, GMT_zone):
     lat = latitude
     long = longitude
     GMT_timeShift = GMT_zone
+    
 
 def getSunDetails(day="today"):
     result = {}
@@ -103,6 +104,9 @@ def getSunDetails(day="today"):
 
 
 if __name__ == '__main__':
+    setLocation('-33.9851430','25.6561820',2)
+    print('Lat:'+lat)
+    print('Long:'+long)
     print('today:')
     print(getSunDetails('today'))
     print('tomorrow:')
