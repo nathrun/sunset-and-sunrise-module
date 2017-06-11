@@ -72,12 +72,12 @@ class sunInfo(object):
         if(self.r.status != 200):
             self.result['status'] = {
                     'successful':False,
-                    'message':'check date format, request failed. Status code: '+str(r.status)
+                    'message'   :'check date format, request failed. Status code: '+str(self.r.status)
                 }
         else:
             self.result['status'] = {
                     'successful':True,
-                    'message':'request was successful'
+                    'message'   :'request was successful'
                 }
 
 
